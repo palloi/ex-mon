@@ -19,7 +19,28 @@ defmodule ExMon.GameTest do
       computer = Player.build("Robo", :punch, :kick, :heal)
 
       Game.start(computer, player)
-      expected_response = %{computer: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Robo"}, player: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Palloi"}, status: :started, turn: :player}
+      expected_response = %{
+        computer: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch
+          },
+          name: "Robo"
+        },
+        player: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch
+          },
+          name: "Palloi"
+        },
+        status: :started,
+        turn: :player
+      }
 
       assert Game.info() == expected_response
     end
@@ -31,11 +52,53 @@ defmodule ExMon.GameTest do
       computer = Player.build("Robo", :punch, :kick, :heal)
 
       Game.start(computer, player)
-      expected_response = %{computer: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Robo"}, player: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Palloi"}, status: :started, turn: :player}
+      expected_response = %{
+        computer: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch},
+            name: "Robo"
+          },
+          player: %Player{
+            life: 100,
+            moves: %{
+              move_avg: :kick,
+              move_heal: :heal,
+              move_rnd: :punch
+            },
+            name: "Palloi"
+          },
+          status: :started,
+          turn: :player
+        }
 
       assert Game.info() == expected_response
 
-      new_state = %{computer: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Robo"}, player: %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Palloi"}, status: :started, turn: :player}
+      new_state = %{
+        computer: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch
+          },
+          name: "Robo"
+        },
+        player: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch
+          },
+          name: "Palloi"
+        },
+        status: :started,
+        turn: :player
+      }
+
       Game.update(new_state)
       expected_response = %{new_state | turn: :computer, status: :continue}
 
