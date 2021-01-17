@@ -9,7 +9,11 @@ defmodule ExMonTest do
     test "returns a player" do
       expected_player = %Player{
         life: 100,
-        moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
+        moves: %{
+          move_avg: :punch,
+          move_heal: :heal,
+          move_rnd: :kick
+        },
         name: "Palloi"
       }
 

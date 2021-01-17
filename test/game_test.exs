@@ -58,21 +58,22 @@ defmodule ExMon.GameTest do
           moves: %{
             move_avg: :kick,
             move_heal: :heal,
-            move_rnd: :punch},
-            name: "Robo"
+            move_rnd: :punch
           },
-          player: %Player{
-            life: 100,
-            moves: %{
-              move_avg: :kick,
-              move_heal: :heal,
-              move_rnd: :punch
-            },
-            name: "Palloi"
+          name: "Robo"
+        },
+        player: %Player{
+          life: 100,
+          moves: %{
+            move_avg: :kick,
+            move_heal: :heal,
+            move_rnd: :punch
           },
-          status: :started,
-          turn: :player
-        }
+          name: "Palloi"
+        },
+        status: :started,
+        turn: :player
+      }
 
       assert Game.info() == expected_response
 
@@ -113,7 +114,16 @@ defmodule ExMon.GameTest do
 
       Game.start(computer, player)
 
-      expected_player =  %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Palloi"}
+      expected_player =  %Player{
+        life: 100,
+        moves: %{
+          move_avg: :kick,
+          move_heal: :heal,
+          move_rnd: :punch
+        },
+        name: "Palloi"
+      }
+
       assert Game.player() == expected_player
     end
   end
@@ -130,23 +140,40 @@ defmodule ExMon.GameTest do
   end
 
   describe "fetch_player/0" do
-    test "return the player state info" do
+    setup do
       player = Player.build("Palloi", :punch, :kick, :heal)
-      computer = Player.build("Robo", :punch, :kick, :heal)
+      computer = Player.build("Robo", :kick, :punch, :heal)
 
       Game.start(computer, player)
-      expected_player = %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Palloi"}
+
+      :ok
+    end
+
+    test "return the player state info" do
+      expected_player = %Player{
+        life: 100,
+        moves: %{
+          move_avg: :kick,
+          move_heal: :heal,
+          move_rnd: :punch
+        },
+        name: "Palloi"
+      }
 
       assert Game.fetch_player(:player) == expected_player
     end
 
     test "return the computer state info" do
-      player = Player.build("Palloi", :punch, :kick, :heal)
-      computer = Player.build("Robo", :punch, :kick, :heal)
+      expected_computer = %Player{
+        life: 100,
+        moves: %{
+          move_avg: :punch,
+          move_heal: :heal,
+          move_rnd: :kick
+        },
+        name: "Robo"
+      }
 
-      Game.start(computer, player)
-      expected_computer =  %Player{life: 100, moves: %{move_avg: :kick, move_heal: :heal, move_rnd: :punch}, name: "Robo"}
-      
       assert Game.fetch_player(:computer) == expected_computer
     end
   end
