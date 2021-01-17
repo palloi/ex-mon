@@ -1,5 +1,7 @@
 # ExMon
 
+[![](https://github.com/actions/palloi/workflows/Test/badge.svg)](https://github.com/actions/palloi/actions)
+
 **TODO: Add description**
 
 ## Installation
